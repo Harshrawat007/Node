@@ -1,0 +1,30 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - run:
+          name: Install Dependencies
+          command: npm install
+      - run:
+          name: Run Tests
+          command: npm test
+  sonarqube-scan:
+    docker:
+      - image: circleci/node:10
+
+    steps:
+      - checkout
+      - run:
+          name: SonarQube Scan
+          command: npm run sonar
+workflows:
+  version: 2
+  build_and_scan:
+    jobs:
+      - build
+      - sonarqube-scan:
+          requires:
+            - build
