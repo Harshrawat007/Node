@@ -5,11 +5,7 @@
   "author": "cmuth001@odu.edu",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "sonar": "npx sonar-scanner"
-  },
-  "devDependencies": {
-    "sonarqube-scanner": "^3.0.0"
+    "start": "node server.js"
   },
   "dependencies": {
     "express": "^4.16.1"
