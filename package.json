@@ -6,7 +6,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "sonar": "sonar-scanner"
+    "sonar": "export PATH=$PATH:./node_modules/.bin && sonar-scanner"
   },
   "devDependencies": {
     "sonarqube-scanner": "^3.0.0"
