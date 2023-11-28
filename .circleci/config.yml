@@ -5,35 +5,20 @@ jobs:
       - image: circleci/node:10
     steps:
       - checkout
-      - run: npm install
-      - run: npm test
-      
-  sonarqube-analysis:
-    docker:
-      - image: circleci/node:10
-    steps:
-      - checkout
       - run:
-          name: SonarQube Analysis
+          name: Install SonarScanner
           command: |
-            curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash 
-            source ~/.profile 
-            nvm install v16
-            sudo npm install -g sonarqube-scanner
-            sonar-scanner \
-              -Dsonar.projectKey=NodeJs-Application \
-              -Dsonar.sources=. \
-              -Dsonar.host.url=http://51.20.52.215:9000 \
-              -Dsonar.login=sqp_8277de1203f23677561066ecdf3e16c6e28ed0b6
-
-workflows:
-  version: 2
-  build_and_analyze:
-    jobs:
-      - build
-      - sonarqube-analysis:
-          requires:
-            - build
-          filters:
-            branches:
-              only: main
+            sudo apt-get update
+            sudo apt-get install -y unzip
+            curl -LsS https://sonarcloud.io/cli/install | sudo bash
+      - run:
+          name: Install Dependencies and Run Tests
+          command: |
+            npm install
+            npm test
+      - run:
+          name: Run SonarQube Analysis
+          command: npm run sonar-scanner
+          environment:
+            SONAR_TOKEN: sqp_91b1c005b2a54e05584b88f42cbdec058b81750f
+            SONAR_HOST_URL: http://51.20.52.215:9000
