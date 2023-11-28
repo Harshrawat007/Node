@@ -10,11 +10,11 @@ jobs:
           command: |
             sudo apt-get update
             sudo apt-get install -y unzip
-            npm install sonar-scanner -g
       - run:
           name: Install Dependencies and Run Tests
           command: |
             npm install
+            npm install sonar-scanner -g
       - run:
           name: Run SonarQube Analysis
           command: npm run sonar-scanner
