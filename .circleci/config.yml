@@ -7,9 +7,7 @@ jobs:
       - checkout
       - run: npm install
       - run: npm test
-      - run: chmod +x /home/circleci/.npm/_npx/100/lib/node_modules/sonar-scanner/bin/sonar-scanner
-
-
+      
   sonarqube-analysis:
     docker:
       - image: circleci/node:10
