@@ -5,26 +5,32 @@ jobs:
       - image: circleci/node:10
     steps:
       - checkout
-      - run:
-          name: Install Dependencies
-          command: npm install
-      - run:
-          name: Run Tests
-          command: npm test
-  sonarqube-scan:
+      - run: npm install
+      - run: npm test
+
+  sonarqube-analysis:
     docker:
       - image: circleci/node:10
-
     steps:
       - checkout
       - run:
-          name: SonarQube Scan
-          command: npm run sonar
+          name: SonarQube Analysis
+          command: |
+            npm install -g sonarqube-scanner
+            sonar-scanner \
+              -Dsonar.projectKey=NodeJs-Application \
+              -Dsonar.sources=. \
+              -Dsonar.host.url=http://51.20.52.215:9000 \
+              -Dsonar.login=sqp_8277de1203f23677561066ecdf3e16c6e28ed0b6
+
 workflows:
   version: 2
-  build_and_scan:
+  build_and_analyze:
     jobs:
       - build
-      - sonarqube-scan:
+      - sonarqube-analysis:
           requires:
             - build
+          filters:
+            branches:
+              only: main
