@@ -10,17 +10,17 @@
   },
   "dependencies": {
     "express": "^4.16.1"
+  },
+  "sonar-scanner": {
+    "token": "sqp_91b1c005b2a54e05584b88f42cbdec058b81750f",
+    "options": {
+      "sonar.projectKey": "NodeJs-Application",
+      "sonar.organization": "NodeJs-Application",
+      "sonar.sources": "src",
+      "sonar.tests": "test",
+      "sonar.javascript.lcov.reportPaths": "coverage/lcov-report/lcov.info",
+      "sonar.language": "js",
+      "sonar.sourceEncoding": "UTF-8"
+    }
   }
- "sonar-scanner": {
-   "token": "your_sonarcloud_token",
-   "options": {
-     "sonar.projectKey": "NodeJs-Application",
-     "sonar.organization": "NodeJs-Application",
-     "sonar.sources": "src",
-     "sonar.tests": "test",
-     "sonar.javascript.lcov.reportPaths": "coverage/lcov-report/lcov.info",
-     "sonar.language": "js",
-     "sonar.sourceEncoding": "UTF-8"
-   }
- }
 }
