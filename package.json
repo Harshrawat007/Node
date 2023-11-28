@@ -5,7 +5,7 @@
   "author": "cmuth001@odu.edu",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
     "sonar": "sonar-scanner"
   },
   "dependencies": {
