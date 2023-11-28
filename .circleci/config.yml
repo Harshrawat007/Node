@@ -16,7 +16,7 @@ jobs:
       - run:
           name: SonarQube Analysis
           command: |
-            npm install -g sonarqube-scanner
+            sudo npm install -g sonarqube-scanner
             sonar-scanner \
               -Dsonar.projectKey=NodeJs-Application \
               -Dsonar.sources=. \
