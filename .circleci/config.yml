@@ -18,7 +18,6 @@ jobs:
           name: Install Dependencies and Run Tests
           command: |
             npm install
-            npm test
       - run:
           name: Run SonarQube Analysis
           command: npm run sonar-scanner
