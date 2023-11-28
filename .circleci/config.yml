@@ -7,6 +7,7 @@ jobs:
       - checkout
       - run: npm install
       - run: npm test
+      - run: sudo chown -R $USER /usr/local/lib/node_modules
 
   sonarqube-analysis:
     docker:
