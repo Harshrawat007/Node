@@ -15,7 +15,7 @@ jobs:
       - run:
           name: Install Node.js and SonarQube Scanner
           command: |
-            apt-get update && apt-get install -y nodejs npm
+            apt-get update && apt-get install -y nodejs npm && apt-get install -y wget
             wget https://download.java.net/java/GA/jdk17/0d483333a00540d886896bac774ff48b/35/GPL/openjdk-17_linux-x64_bin.tar.gz && \
             mkdir -p /usr/lib/jvm && \
             tar -zxvf openjdk-17_linux-x64_bin.tar.gz -C /usr/lib/jvm && \
