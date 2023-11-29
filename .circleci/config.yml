@@ -2,37 +2,45 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/ubuntu:latest
+      - image: ubuntu:latest  
+    steps:
+      - checkout
+      - run: apt-get update && apt-get install -y nodejs npm
+      - run: npm install
+  sonarqube-analysis:
+    docker:
+      - image: ubuntu:latest  
     steps:
       - checkout
       - run:
-          name: Install SonarScanner
+          name: Install Node.js and SonarQube Scanner
           command: |
-            sudo apt-get update
-            sudo apt-get install -y unzip
-            apt-get update && \
-            apt-get install -y curl && \
-            apt-get clean && \
-            rm -rf /var/lib/apt/lists/*
-            curl -sL https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - && \
-            apt-get install -y nodejs && \
-            apt-get clean && \
-            rm -rf /var/lib/apt/lists/*
-            node -v && npm -v
+            apt-get update && apt-get install -y nodejs npm
             wget https://download.java.net/java/GA/jdk17/0d483333a00540d886896bac774ff48b/35/GPL/openjdk-17_linux-x64_bin.tar.gz && \
-            sudo mkdir -p /usr/lib/jvm && \
-            sudo tar -zxvf openjdk-17_linux-x64_bin.tar.gz -C /usr/lib/jvm && \
-            sudo rm openjdk-17_linux-x64_bin.tar.gz
+            mkdir -p /usr/lib/jvm && \
+            tar -zxvf openjdk-17_linux-x64_bin.tar.gz -C /usr/lib/jvm && \
+            rm openjdk-17_linux-x64_bin.tar.gz
             export JAVA_HOME=/usr/lib/jvm/jdk-17
             export PATH=$PATH:$JAVA_HOME/bin
             java -version
+            npm install -g sonarqube-scanner
       - run:
-          name: Install Dependencies and Run Tests
+          name: SonarQube Analysis
           command: |
-            npm install sonar-scanner -g
-      - run:
-          name: Run SonarQube Analysis
-          command: npm run sonar-scanner
-          environment:
-            SONAR_TOKEN: sqp_91b1c005b2a54e05584b88f42cbdec058b81750f
-            SONAR_HOST_URL: http://51.20.52.215:9000
+            sonar-scanner \
+              -Dsonar.projectKey=NodeJs-Application \
+              -Dsonar.sources=. \
+              -Dsonar.host.url=http://51.20.52.215:9000 \
+              -Dsonar.login=sqp_91b1c005b2a54e05584b88f42cbdec058b81750f
+
+workflows:
+  version: 2
+  build_and_analyze:
+    jobs:
+      - build
+      - sonarqube-analysis:
+          requires:
+            - build
+          filters:
+            branches:
+              only: main
