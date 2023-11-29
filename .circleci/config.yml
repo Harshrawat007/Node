@@ -20,7 +20,7 @@ jobs:
       - run:
           name: Install Dependencies and Run Tests
           command: |
-            sudo npm install sonar-scanner -g
+            npm install sonar-scanner -g
       - run:
           name: Run SonarQube Analysis
           command: npm run sonar-scanner
