@@ -18,7 +18,6 @@ jobs:
             apt-get update && apt-get install -y wget && apt-get install -y curl
             curl -sL https://deb.nodesource.com/setup_16.x | bash -
             apt-get install -y nodejs
-            npm install -g npm
             node -v
             npm -v
             wget https://download.java.net/java/GA/jdk17/0d483333a00540d886896bac774ff48b/35/GPL/openjdk-17_linux-x64_bin.tar.gz && \
