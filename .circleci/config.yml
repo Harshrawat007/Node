@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/node:16
+      - image: circleci/ubuntu:22.04
     steps:
       - checkout
       - run:
@@ -10,6 +10,15 @@ jobs:
           command: |
             sudo apt-get update
             sudo apt-get install -y unzip
+            apt-get update && \
+            apt-get install -y curl && \
+            apt-get clean && \
+            rm -rf /var/lib/apt/lists/*
+            curl -sL https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - && \
+            apt-get install -y nodejs && \
+            apt-get clean && \
+            rm -rf /var/lib/apt/lists/*
+            node -v && npm -v
             wget https://download.java.net/java/GA/jdk17/0d483333a00540d886896bac774ff48b/35/GPL/openjdk-17_linux-x64_bin.tar.gz && \
             sudo mkdir -p /usr/lib/jvm && \
             sudo tar -zxvf openjdk-17_linux-x64_bin.tar.gz -C /usr/lib/jvm && \
