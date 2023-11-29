@@ -5,6 +5,7 @@ jobs:
       - image: ubuntu:latest  
     steps:
       - checkout
+      - run: apt-get update && apt-get install -y nodejs npm
       - run: npm install
   sonarqube-analysis:
     docker:
