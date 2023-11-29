@@ -16,6 +16,7 @@ jobs:
             sudo rm openjdk-17_linux-x64_bin.tar.gz
             export JAVA_HOME=/usr/lib/jvm/jdk-17
             export PATH=$PATH:$JAVA_HOME/bin
+            java -version
       - run:
           name: Install Dependencies and Run Tests
           command: |
