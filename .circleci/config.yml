@@ -29,7 +29,7 @@ jobs:
           command: |
             sonar-scanner \
               -Dsonar.projectKey=NodeJs-Application \
-              -Dsonar.sources=. \
+     #         -Dsonar.sources=. \
               -Dsonar.host.url=http://51.20.52.215:9000 \
               -Dsonar.login=sqp_91b1c005b2a54e05584b88f42cbdec058b81750f
 
