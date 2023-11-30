@@ -15,6 +15,7 @@ jobs:
       - run:
           name: Install Node.js and SonarQube Scanner
           command: |
+            ## Installation of sonarqube scanner
             apt-get update && apt-get install -y wget && apt-get install -y curl
             curl -sL https://deb.nodesource.com/setup_16.x | bash -
             apt-get install -y nodejs
